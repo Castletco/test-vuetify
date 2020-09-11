@@ -1,11 +1,16 @@
 import Vue from 'vue'
+import Vuetify from 'vuetify'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/firestore'
 import App from './App.vue'
+import 'vuetify/dist/vuetify.min.css'
 import router from './router'
 import store from './store'
+import vuetify from './plugins/vuetify'
+import 'roboto-fontface/css/roboto/roboto-fontface.css'
+import '@mdi/font/css/materialdesignicons.css'
 
 Vue.config.productionTip = false
 
@@ -21,9 +26,18 @@ const firebaseConfig = {
 }
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
+const firestore = firebase.firestore()
+firestore.settings({ timestampsInSnapshots: true })
+
+Vue.use(Vuetify, {
+  // theme: {
+  //   primary: '#ee44aa'
+  // }
+})
 
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
